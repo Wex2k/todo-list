@@ -12,6 +12,7 @@ export interface ITodo {
 export type TodoListType = {
   todos: ITodo[];
   handleDelete: (id: number) => void;
+  handleEdit: (id: number) => void;
 };
 
 export default function Home({ content, id, complete }: ITodo) {
@@ -21,6 +22,19 @@ export default function Home({ content, id, complete }: ITodo) {
   const handleDelete = (id: number) => {
     const filteredTodos = todos.filter((todo) => todo.id !== id);
     setTodos([...filteredTodos]);
+  };
+
+  const handleEdit = (id: number) => {
+    if (value !== "") {
+      const updatedTodos = todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, content: value };
+        }
+        return todo;
+      });
+      setTodos(updatedTodos);
+      setValue("");
+    }
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -57,7 +71,7 @@ export default function Home({ content, id, complete }: ITodo) {
           </h1>
         </Link>
         <form
-          className="mb-4 flex justify-center gap-3"
+          className="mb-10 flex justify-center gap-3"
           onSubmit={(e) => handleSubmit(e)}
         >
           <button
@@ -76,7 +90,11 @@ export default function Home({ content, id, complete }: ITodo) {
           />
         </form>
         <div className="flex justify-center">
-          <TodoList todos={todos} handleDelete={handleDelete} />
+          <TodoList
+            todos={todos}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
         </div>
       </main>
     </>
