@@ -86,7 +86,7 @@ export default function Home() {
       <main className="min-h-screen w-full grid-cols-2 scroll-smooth bg-gradient-to-b from-[#2e026d] to-[#15162c] font-sans">
         <Link href={"/"}>
           <h1 className="mb-7 flex cursor-pointer justify-center text-5xl font-extrabold uppercase tracking-tight text-white sm:text-[5rem]">
-            Todos
+            My Todos
           </h1>
         </Link>
         <form
@@ -104,7 +104,7 @@ export default function Home() {
             autoComplete="off"
             name="content"
             placeholder="Enter todo text"
-            className="h-auto w-80 rounded-md border-2 border-purple-400 bg-transparent text-white outline-none drop-shadow-2xl placeholder:text-white"
+            className="h-auto w-80 rounded-md border-2 border-purple-400 bg-transparent text-white outline-none drop-shadow-2xl placeholder:text-white placeholder:text-white/60"
             value={value}
             onChange={(e) => handleChange(e)}
           />
