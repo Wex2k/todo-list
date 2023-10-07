@@ -6,18 +6,12 @@ function TodoList({ todos, handleDelete, handleEdit }: TodoListType) {
   return (
     <div>
       {todos.map((todo) => (
-        <div className="mb-4 flex w-96 flex-row gap-4" key={todo.id}>
-          <div className="flex h-16 w-full items-center justify-between gap-2 break-words rounded-lg bg-purple-400 p-3 text-white">
-            <p>{todo.content}</p>
-            <div className="flex items-center">
-              <AiFillEdit
-                className="text-3xl"
-                onClick={() => handleEdit(todo.id)}
-              />
-              <AiFillCheckCircle
-                onClick={() => handleDelete(todo.id)}
-                className="text-3xl"
-              />
+        <div className="mb-4 flex w-96 flex-row" key={todo.id}>
+          <div className="flex h-16 w-full items-center justify-between rounded-lg bg-purple-400 p-3 text-white">
+            <p className="overflow-hidden break-words">{todo.content}</p>
+            <div className="flex cursor-pointer items-center gap-2 text-3xl">
+              <AiFillEdit onClick={() => handleEdit(todo.id)} />
+              <AiFillCheckCircle onClick={() => handleDelete(todo.id)} />
             </div>
           </div>
         </div>
