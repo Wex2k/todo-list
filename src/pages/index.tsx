@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import TodoList from "~/components/TodoList";
 
 export interface ITodo {
-  content: String;
+  content: string;
   id: number;
   complete: boolean;
 }
@@ -26,9 +26,7 @@ export default function Home() {
   const [todos, setTodos] = useState<ITodo[]>(() => {
     if (typeof window !== "undefined") {
       const savedTodos = JSON.parse(localStorage.getItem("todos")!);
-      if (savedTodos === null) {
-        return [];
-      }
+      if (savedTodos === null) return [];
       return savedTodos;
     }
     return [];
@@ -104,7 +102,7 @@ export default function Home() {
             autoComplete="off"
             name="content"
             placeholder="Enter todo text"
-            className="h-auto w-80 rounded-md border-2 border-purple-400 bg-transparent text-white outline-none drop-shadow-2xl placeholder:text-white placeholder:text-white/60"
+            className="h-auto w-80 rounded-md border-2 border-purple-400 bg-purple-400/5 text-white outline-none drop-shadow-2xl placeholder:text-white/60"
             value={value}
             onChange={(e) => handleChange(e)}
           />
