@@ -91,12 +91,6 @@ export default function Home() {
           className="mb-10 flex justify-center gap-3"
           onSubmit={(e) => handleSubmit(e)}
         >
-          <button
-            className="rounded-md bg-purple-400 p-3 uppercase text-white drop-shadow-2xl transition duration-300 hover:bg-purple-600"
-            onClick={() => handleSubmit}
-          >
-            Add todo
-          </button>
           <input
             type="text"
             autoComplete="off"
@@ -106,6 +100,12 @@ export default function Home() {
             value={value}
             onChange={(e) => handleChange(e)}
           />
+          <button
+            className="rounded-md bg-purple-400 p-3 uppercase text-white drop-shadow-2xl transition duration-300 hover:bg-purple-600"
+            onClick={() => handleSubmit}
+          >
+            Add todo
+          </button>
         </form>
         <div className="flex justify-center">
           {loaded && (
