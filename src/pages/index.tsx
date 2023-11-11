@@ -69,6 +69,10 @@ export default function Home() {
     }
   };
 
+  const handleClear = () => {
+    setTodos([]);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setValue(e.currentTarget.value);
@@ -80,7 +84,7 @@ export default function Home() {
         <title>Todos</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="min-h-screen w-full grid-cols-2 scroll-smooth bg-gradient-to-b from-[#444346] to-[#212233] font-sans">
+      <main className="flex min-h-screen w-full grid-cols-2 flex-col scroll-smooth bg-gradient-to-b from-[#444346] to-[#212233] p-2 font-sans md:p-0">
         <Link href={"/"}>
           <h1 className="mb-7 flex cursor-pointer justify-center text-5xl font-extrabold uppercase tracking-tight text-white sm:text-[5rem]">
             My Todos
@@ -100,19 +104,32 @@ export default function Home() {
             onChange={(e) => handleChange(e)}
           />
           <button
-            className="rounded-md bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600"
+            className="rounded-md bg-slate-500 p-1 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
             onClick={() => handleSubmit}
           >
             Add todo
           </button>
         </form>
-        <div className="flex justify-center">
+        <div className="mb-2 flex justify-center">
           {loaded && (
             <TodoList
               todos={todos}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
             />
+          )}
+          {todos.length === 0 && (
+            <p className="text-3xl text-white">No todos. Take a rest!</p>
+          )}
+        </div>
+        <div className="flex justify-end">
+          {todos.length > 0 && (
+            <button
+              className="rounded-md bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
+              onClick={handleClear}
+            >
+              Clear
+            </button>
           )}
         </div>
       </main>
