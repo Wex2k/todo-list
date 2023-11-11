@@ -85,11 +85,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen w-full flex-col scroll-smooth bg-gradient-to-b from-[#444346] to-[#212233] p-2 font-sans text-white md:p-6">
-        <Link href={"/"}>
-          <h1 className="mb-7 flex cursor-pointer justify-center text-5xl font-extrabold uppercase tracking-tight text-white sm:text-[5rem]">
-            My Todos
-          </h1>
-        </Link>
         <form
           className="mb-10 flex justify-center gap-3"
           onSubmit={(e) => handleSubmit(e)}
