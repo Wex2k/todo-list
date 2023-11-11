@@ -84,7 +84,7 @@ export default function Home() {
         <title>Todos</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen w-full grid-cols-2 flex-col scroll-smooth bg-gradient-to-b from-[#444346] to-[#212233] p-2 font-sans md:p-0">
+      <main className="flex min-h-screen w-full flex-col scroll-smooth bg-gradient-to-b from-[#444346] to-[#212233] p-2 font-sans text-white md:p-6">
         <Link href={"/"}>
           <h1 className="mb-7 flex cursor-pointer justify-center text-5xl font-extrabold uppercase tracking-tight text-white sm:text-[5rem]">
             My Todos
@@ -119,10 +119,10 @@ export default function Home() {
             />
           )}
           {todos.length === 0 && (
-            <p className="text-3xl text-white">No todos. Take a rest!</p>
+            <p className="text-2xl">No todos. Take a rest!</p>
           )}
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-center">
           {todos.length > 0 && (
             <button
               className="rounded-md bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
