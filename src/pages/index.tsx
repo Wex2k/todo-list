@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import TodoList from "~/components/TodoList";
 
@@ -84,6 +83,7 @@ export default function Home() {
         <title>Todos</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className="flex min-h-screen w-full flex-col scroll-smooth bg-gradient-to-b from-[#444346] to-[#212233] p-2 font-sans text-white md:p-6">
         <form
           className="mb-10 flex justify-center gap-3"
@@ -105,6 +105,7 @@ export default function Home() {
             Add todo
           </button>
         </form>
+
         <div className="mb-2 flex justify-center">
           {loaded && (
             <TodoList
@@ -117,6 +118,7 @@ export default function Home() {
             <p className="text-2xl">No todos. Take a rest!</p>
           )}
         </div>
+
         <div className="flex justify-center">
           {todos.length > 0 && (
             <button
