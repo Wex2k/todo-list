@@ -2,18 +2,6 @@ import Head from "next/head";
 import { FormEvent, useEffect, useState } from "react";
 import TodoList from "~/components/TodoList";
 
-export interface ITodo {
-  content: string;
-  id: number;
-  complete: boolean;
-}
-
-export type TodoListType = {
-  todos: ITodo[];
-  handleDelete: (id: number) => void;
-  handleEdit: (id: number) => void;
-};
-
 export default function Home() {
   const [value, setValue] = useState("");
   const [loaded, setloaded] = useState(false);
@@ -22,7 +10,7 @@ export default function Home() {
     setloaded(true);
   }, []);
 
-  const [todos, setTodos] = useState<ITodo[]>(() => {
+  const [todos, setTodos] = useState<Todo[]>(() => {
     if (typeof window !== "undefined") {
       const savedTodos = JSON.parse(localStorage.getItem("todos")!);
       if (savedTodos === null) return [];

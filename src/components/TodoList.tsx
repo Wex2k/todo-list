@@ -1,8 +1,7 @@
 import React from "react";
-import type { TodoListType } from "~/pages/index";
 import { AiFillEdit, AiFillCheckCircle } from "react-icons/ai";
 
-function TodoList({ todos, handleDelete, handleEdit }: TodoListType) {
+function TodoList({ todos, handleDelete, handleEdit }: TodoList) {
   return (
     <div>
       {todos.map((todo) => (
