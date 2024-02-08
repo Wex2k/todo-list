@@ -11,7 +11,7 @@ interface Todo {
  * Represents a todo list.
  */
 interface TodoList {
-  todos: ITodo[];
+  todos: Todo[];
   handleDelete: (id: number) => void;
   handleEdit: (id: number) => void;
 }
