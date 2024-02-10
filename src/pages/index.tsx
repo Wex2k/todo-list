@@ -88,7 +88,7 @@ export default function Home() {
           />
           <button
             className="rounded-full bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
-            onClick={(e) => handleSubmit}
+            onClick={() => handleSubmit}
           >
             <IoMdAdd className="text-3xl" />
           </button>
