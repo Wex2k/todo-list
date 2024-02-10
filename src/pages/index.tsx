@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { FormEvent, useEffect, useState } from "react";
 import TodoList from "~/components/TodoList";
+import { IoMdAdd } from "react-icons/io";
 
 export default function Home() {
   const [value, setValue] = useState("");
@@ -36,6 +37,7 @@ export default function Home() {
         }
         return todo;
       });
+
       setTodos(updatedTodos);
       setValue("");
     }
@@ -57,12 +59,10 @@ export default function Home() {
   };
 
   const handleClear = () => {
-    setTodos([]);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setValue(e.currentTarget.value);
+    if (confirm("Are you sure you want to clear all todos?")) {
+      setTodos([]);
+    }
+    return;
   };
 
   return (
@@ -84,13 +84,13 @@ export default function Home() {
             placeholder="Enter todo text"
             className="h-auto w-80 rounded-md border-2 border-slate-500 bg-slate-400/5 text-white outline-none drop-shadow-2xl transition duration-300 placeholder:text-white/60 hover:border-slate-600"
             value={value}
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => setValue(e.currentTarget.value)}
           />
           <button
-            className="rounded-md bg-slate-500 p-1 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
-            onClick={() => handleSubmit}
+            className="rounded-full bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
+            onClick={(e) => handleSubmit}
           >
-            Add todo
+            <IoMdAdd className="text-3xl" />
           </button>
         </form>
 

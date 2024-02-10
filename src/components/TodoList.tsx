@@ -8,6 +8,7 @@ function TodoList({ todos, handleDelete, handleEdit }: TodoList) {
         <div
           className="mb-5 flex w-96 cursor-pointer select-none flex-col"
           key={todo.id}
+          tabIndex={0}
         >
           <div className="flex h-16 w-full items-center justify-between rounded-lg bg-slate-500 p-3 text-white transition duration-200 hover:bg-slate-600">
             <p className="overflow-hidden break-words">{todo.content}</p>
