@@ -59,6 +59,7 @@ export default function Home() {
   };
 
   const handleClear = () => {
+    if (todos.length === 0) return;
     if (confirm("Are you sure you want to clear all todos?")) {
       setTodos([]);
     }
