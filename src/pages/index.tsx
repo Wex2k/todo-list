@@ -83,7 +83,7 @@ export default function Home() {
             autoComplete="off"
             name="content"
             placeholder="Enter todo text"
-            className="h-auto w-80 rounded-md border-2 border-slate-500 bg-slate-400/5 text-white outline-none drop-shadow-2xl transition duration-300 placeholder:text-white/60 hover:border-slate-600"
+            className="h-auto w-80 rounded-md border-2 border-slate-500 bg-slate-400/5 indent-2 text-white outline-none drop-shadow-2xl transition duration-300 placeholder:text-white/60 hover:border-slate-600"
             value={value}
             onChange={(e) => setValue(e.currentTarget.value)}
           />
