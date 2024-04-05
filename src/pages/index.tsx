@@ -73,50 +73,52 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex min-h-screen w-full flex-col scroll-smooth bg-gradient-to-b from-[#444346] to-[#212233] p-2 font-sans text-white md:p-6">
-        <form
-          className="mb-10 flex justify-center gap-3"
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          <input
-            type="text"
-            autoComplete="off"
-            name="content"
-            placeholder="Enter todo text"
-            className="h-auto w-80 rounded-md border-2 border-slate-500 bg-slate-400/5 indent-2 text-white outline-none drop-shadow-2xl transition duration-300 placeholder:text-white/60 hover:border-slate-600"
-            value={value}
-            onChange={(e) => setValue(e.currentTarget.value)}
-          />
-          <button
-            className="rounded-full bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
-            onClick={() => handleSubmit}
+      <main className="flex min-h-screen flex-col scroll-smooth bg-gradient-to-b from-[#444346] to-[#212233] p-2 font-sans text-white md:p-6">
+        <div className="flex flex-col justify-center gap-9">
+          <form
+            className="flex justify-center gap-3"
+            onSubmit={(e) => handleSubmit(e)}
           >
-            <IoMdAdd className="text-3xl" />
-          </button>
-        </form>
-
-        <div className="mb-2 flex justify-center">
-          {loaded && (
-            <TodoList
-              todos={todos}
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
+            <input
+              type="text"
+              autoComplete="off"
+              name="content"
+              placeholder="Add a todo..."
+              className="h-auto w-80 rounded-md border-2 border-slate-500 bg-slate-400/5 indent-2 text-white outline-none drop-shadow-2xl transition duration-300 placeholder:text-white/60 hover:border-slate-600"
+              value={value}
+              onChange={(e) => setValue(e.currentTarget.value)}
             />
-          )}
-          {todos.length === 0 && (
-            <p className="text-2xl">No todos. Take a rest!</p>
-          )}
-        </div>
-
-        <div className="flex justify-center">
-          {todos.length > 0 && (
             <button
-              className="rounded-md bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
-              onClick={handleClear}
+              className="rounded-full bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
+              onClick={() => handleSubmit}
             >
-              Clear
+              <IoMdAdd className="text-3xl" />
             </button>
-          )}
+          </form>
+
+          <div className="flex justify-center">
+            {loaded && (
+              <TodoList
+                todos={todos}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+              />
+            )}
+            {todos.length === 0 && (
+              <p className="text-2xl">No todos. Take a rest!</p>
+            )}
+          </div>
+
+          <div className="flex justify-center">
+            {todos.length > 0 && (
+              <button
+                className="rounded-md bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
+                onClick={handleClear}
+              >
+                Clear
+              </button>
+            )}
+          </div>
         </div>
       </main>
     </>
