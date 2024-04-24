@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { FormEvent, useEffect, useState } from "react";
 import TodoList from "@/components/TodoList";
-import { IoMdAdd } from "react-icons/io";
 import { Alert } from "@/components/Alert";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -64,6 +63,7 @@ export default function Home() {
   const handleClear = () => {
     if (todos.length === 0) return;
     setTodos([]);
+    scrollTo(0, 0);
   };
 
   return (

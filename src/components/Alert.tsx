@@ -21,13 +21,15 @@ export const Alert = ({ message, triggerMessage, handleClear }: AlertProps) => {
             {triggerMessage}
           </Button>
         </AlertDialogTrigger>
-        <AlertDialogContent className="">
-          <AlertDialogHeader>
+        <AlertDialogContent className="bg-black">
+          <AlertDialogHeader className="text-white">
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>{message}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel className="bg-red-400 hover:bg-red-500">
+              Cancel
+            </AlertDialogCancel>
             <AlertDialogAction onClick={handleClear}>
               Continue
             </AlertDialogAction>
