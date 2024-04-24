@@ -95,30 +95,32 @@ export default function Home() {
               <IoMdAdd className="text-3xl" />
             </button>
           </form>
+          {loaded && (
+            <>
+              <div className="flex justify-center">
+                <TodoList
+                  todos={todos}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+                />
 
-          <div className="flex justify-center">
-            {loaded && (
-              <TodoList
-                todos={todos}
-                handleDelete={handleDelete}
-                handleEdit={handleEdit}
-              />
-            )}
-            {todos.length === 0 && (
-              <p className="text-2xl">No todos. Take a rest!</p>
-            )}
-          </div>
+                {todos.length === 0 && (
+                  <p className="text-2xl">No todos. Take a rest!</p>
+                )}
+              </div>
 
-          <div className="flex justify-center">
-            {todos.length > 0 && (
-              <button
-                className="rounded-md bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
-                onClick={handleClear}
-              >
-                Clear
-              </button>
-            )}
-          </div>
+              <div className="flex justify-center">
+                {todos.length > 0 && (
+                  <button
+                    className="rounded-md bg-slate-500 p-3 uppercase text-white drop-shadow-lg transition duration-300 hover:bg-slate-600 md:p-4"
+                    onClick={handleClear}
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </main>
     </>
