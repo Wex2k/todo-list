@@ -4,7 +4,7 @@
 interface Todo {
   content: string;
   id: number;
-  complete: boolean;
+  editing: boolean;
 }
 
 /**
