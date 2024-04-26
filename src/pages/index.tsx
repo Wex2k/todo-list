@@ -4,67 +4,16 @@ import TodoList from "@/components/TodoList";
 import { Alert } from "@/components/Alert";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import useTodo from "@/hooks/useTodo";
 
 export default function Home() {
-  const [value, setValue] = useState("");
   const [loaded, setloaded] = useState(false);
+  const { inputValueAdd, setInputValueAdd, todos, handleSubmit, handleClear } =
+    useTodo();
 
   useEffect(() => {
     setloaded(true);
   }, []);
-
-  const [todos, setTodos] = useState<Todo[]>(() => {
-    if (typeof window !== "undefined") {
-      const savedTodos = JSON.parse(localStorage.getItem("todos")!);
-      if (savedTodos === null) return [];
-      return savedTodos;
-    }
-    return [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
-  const handleDelete = (id: number) => {
-    const filteredTodos = todos.filter((todo) => todo.id !== id);
-    setTodos([...filteredTodos]);
-  };
-
-  const handleEdit = (id: number) => {
-    if (value !== "") {
-      const updatedTodos = todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, content: value };
-        }
-        return todo;
-      });
-
-      setTodos(updatedTodos);
-      setValue("");
-    }
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (value !== "") {
-      setTodos([
-        ...todos,
-        {
-          content: value,
-          id: Date.now(),
-          complete: false,
-        },
-      ]);
-      setValue("");
-    }
-  };
-
-  const handleClear = () => {
-    if (todos.length === 0) return;
-    setTodos([]);
-    scrollTo(0, 0);
-  };
 
   return (
     <>
@@ -84,8 +33,8 @@ export default function Home() {
                 type="text"
                 placeholder="Add todo..."
                 className="w-full rounded-lg border-2 border-white/50 bg-white/20 p-2 text-white placeholder:text-white/50 focus:border-white/50 focus:ring-0"
-                onChange={(e) => setValue(e.currentTarget.value)}
-                value={value}
+                onChange={(e) => setInputValueAdd(e.currentTarget.value)}
+                value={inputValueAdd}
               />
               <Button variant={"secondary"} className="uppercase">
                 Add todo
@@ -95,11 +44,7 @@ export default function Home() {
           {loaded && (
             <>
               <div className="flex justify-center">
-                <TodoList
-                  todos={todos}
-                  handleDelete={handleDelete}
-                  handleEdit={handleEdit}
-                />
+                <TodoList />
 
                 {todos.length === 0 && (
                   <p className="text-2xl">No todos. Take a rest!</p>

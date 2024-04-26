@@ -27,10 +27,11 @@ export const Alert = ({ message, triggerMessage, handleClear }: AlertProps) => {
             <AlertDialogDescription>{message}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="bg-red-400 hover:bg-red-500">
-              Cancel
-            </AlertDialogCancel>
-            <AlertDialogAction onClick={handleClear}>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleClear}
+              className="hover:bg-red-600"
+            >
               Continue
             </AlertDialogAction>
           </AlertDialogFooter>
