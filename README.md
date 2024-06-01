@@ -15,3 +15,23 @@ A simple, yet useful tool for managing your daily tasks.
 
 ## Deployment
 This application has been deployed using [Vercel](https://vercel.com) and can be accessed [here](https://todo-list-wex2k.vercel.app/).
+
+## Development
+1. Clone the repository
+```
+git clone https://github.com/Wex2k/todo-list
+```
+2. Change the directory
+```
+cd todo-list
+```
+3. Start the localhost for development
+
+Using NPM:
+```
+npm run dev
+```
+Using PNPM:
+```
+pnpm dev
+```
