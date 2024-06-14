@@ -2,7 +2,6 @@ import { FormEvent, useEffect, useState } from "react";
 
 const useTodo = () => {
   const [inputValueAdd, setInputValueAdd] = useState("");
-  const [inputValueEdit, setInputValueEdit] = useState("");
 
   const [todos, setTodos] = useState<Todo[]>(() => {
     if (typeof window !== "undefined") {
@@ -18,21 +17,18 @@ const useTodo = () => {
   }, [todos]);
 
   const handleDelete = (id: number) => {
-    const filteredTodos = todos.filter((todo) => todo.id !== id);
-    setTodos([...filteredTodos]);
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
-  const handleEdit = (id: number) => {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, content: inputValueEdit, editing: !todo.editing };
-      }
-      return todo;
-    });
-
-    setTodos(newTodos);
+  const handleEdit = (id: number, content: string) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id
+          ? { ...todo, content: content, editing: !todo.editing }
+          : todo,
+      ),
+    );
     setInputValueAdd("");
-    setInputValueEdit("");
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -59,8 +55,6 @@ const useTodo = () => {
   return {
     inputValueAdd,
     setInputValueAdd,
-    inputValueEdit,
-    setInputValueEdit,
     todos,
     setTodos,
     handleDelete,
