@@ -22,7 +22,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex min-h-screen flex-col scroll-smooth bg-black/90 p-2 font-sans text-white md:p-6">
+      <main className="flex min-h-screen flex-col scroll-smooth bg-black/90 p-2 font-sans text-white selection:bg-white/20 md:p-6">
         <div className="flex flex-col justify-center gap-9">
           <div className="flex justify-center">
             <form
@@ -32,11 +32,11 @@ export default function Home() {
               <Input
                 type="text"
                 placeholder="Add todo..."
-                className="w-full rounded-lg border-2 border-white/50 bg-white/20 p-2 text-white placeholder:text-white/50 focus:border-white/50 focus:ring-0"
+                className="w-full rounded-md border-2 border-white/50 bg-white/20 p-2 text-white placeholder:text-white/50 focus:border-white/50 focus:ring-0"
                 onChange={(e) => setInputValueAdd(e.currentTarget.value)}
                 value={inputValueAdd}
               />
-              <Button variant={"secondary"} className="uppercase">
+              <Button variant="secondary" className="rounded-md uppercase">
                 Add todo
               </Button>
             </form>

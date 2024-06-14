@@ -16,7 +16,7 @@ export const Alert = ({ message, triggerMessage, handleClear }: AlertProps) => {
   return (
     <>
       <AlertDialog>
-        <AlertDialogTrigger>
+        <AlertDialogTrigger asChild>
           <Button variant={"secondary"} className="uppercase">
             {triggerMessage}
           </Button>
