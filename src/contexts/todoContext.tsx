@@ -1,7 +1,11 @@
-import { FormEvent, useEffect, useState } from "react";
+import { createContext, FormEvent, useEffect, useState } from "react";
 
-const useTodo = () => {
-  const [inputValueAdd, setInputValueAdd] = useState("");
+export const TodoContext = createContext<TodoContext | undefined>(undefined);
+
+const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [input, setInput] = useState("");
 
   const [todos, setTodos] = useState<Todo[]>(() => {
     if (typeof window !== "undefined") {
@@ -28,21 +32,21 @@ const useTodo = () => {
           : todo,
       ),
     );
-    setInputValueAdd("");
+    setInput("");
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (inputValueAdd !== "") {
+    if (input !== "") {
       setTodos([
         ...todos,
         {
-          content: inputValueAdd,
+          content: input,
           editing: false,
           id: Date.now(),
         },
       ]);
-      setInputValueAdd("");
+      setInput("");
     }
   };
 
@@ -52,16 +56,22 @@ const useTodo = () => {
     scrollTo(0, 0);
   };
 
-  return {
-    inputValueAdd,
-    setInputValueAdd,
-    todos,
-    setTodos,
-    handleDelete,
-    handleEdit,
-    handleSubmit,
-    handleClear,
-  };
+  return (
+    <TodoContext.Provider
+      value={{
+        todos,
+        input,
+        setInput,
+        handleClear,
+        handleDelete,
+        handleEdit,
+        handleSubmit,
+        setTodos,
+      }}
+    >
+      {children}
+    </TodoContext.Provider>
+  );
 };
 
-export default useTodo;
+export default TodoProvider;
