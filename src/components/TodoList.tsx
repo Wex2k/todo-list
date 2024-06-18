@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Todo from "./Todo";
-import useTodo from "@/hooks/useTodo";
+import { TodoContext } from "@/contexts/todoContext";
 
 function TodoList() {
-  const { todos } = useTodo();
+  const { todos } = useContext(TodoContext) as TodoContext;
   return (
     <div className="flex flex-col gap-5">
       {todos.length > 0 &&

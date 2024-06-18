@@ -1,15 +1,16 @@
 import Head from "next/head";
-import { FormEvent, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TodoList from "@/components/TodoList";
 import { Alert } from "@/components/Alert";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import useTodo from "@/hooks/useTodo";
+import { TodoContext } from "@/contexts/todoContext";
 
 export default function Home() {
   const [loaded, setloaded] = useState(false);
-  const { inputValueAdd, setInputValueAdd, todos, handleSubmit, handleClear } =
-    useTodo();
+  const { input, setInput, todos, handleSubmit, handleClear } = useContext(
+    TodoContext,
+  ) as TodoContext;
 
   useEffect(() => {
     setloaded(true);
@@ -33,8 +34,8 @@ export default function Home() {
                 type="text"
                 placeholder="Add todo..."
                 className="w-full rounded-md border-2 border-white/50 bg-white/20 p-2 text-white placeholder:text-white/50 focus:border-white/50 focus:ring-0"
-                onChange={(e) => setInputValueAdd(e.currentTarget.value)}
-                value={inputValueAdd}
+                onChange={(e) => setInput(e.currentTarget.value)}
+                value={input}
               />
               <Button variant="secondary" className="rounded-md uppercase">
                 Add todo

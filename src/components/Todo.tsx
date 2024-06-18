@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Input } from "./ui/input";
 import { FaPen } from "react-icons/fa";
 import { ImCheckmark } from "react-icons/im";
-import useTodo from "@/hooks/useTodo";
+import { TodoContext } from "@/contexts/todoContext";
 
 function Todo({ id, content, editing }: Todo) {
-  const { handleEdit, handleDelete } = useTodo();
+  const { handleEdit, handleDelete } = useContext(TodoContext) as TodoContext;
   const [inputValueEdit, setInputValueEdit] = useState(content);
-
-  console.log("Content: ", content, "Editing: ", editing, "ID: ", id);
 
   return (
     <div className="w-96 cursor-pointer" tabIndex={0}>
