@@ -4,6 +4,7 @@ const config = {
   parserOptions: {
     project: true,
   },
+  root: true,
   plugins: ["@typescript-eslint"],
   extends: [
     "next/core-web-vitals",
@@ -20,6 +21,7 @@ const config = {
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/consistent-type-imports": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
   },
 };
 
