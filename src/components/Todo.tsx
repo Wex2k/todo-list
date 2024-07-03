@@ -9,7 +9,7 @@ function Todo({ id, content, editing }: Todo) {
   const [inputValueEdit, setInputValueEdit] = useState(content);
 
   return (
-    <div className="w-96 cursor-pointer" tabIndex={0}>
+    <div className="w-96 cursor-pointer">
       <div className="flex items-center justify-between gap-3 rounded-md bg-white/20 p-2 text-white transition duration-300 hover:bg-white/30">
         {!editing ? (
           <p className="overflow-hidden break-words">{content}</p>
@@ -26,18 +26,12 @@ function Todo({ id, content, editing }: Todo) {
           />
         )}
 
-        <div className="flex cursor-pointer items-center gap-2 rounded-lg bg-white/60 p-3 text-xl">
-          {!editing && (
-            <FaPen
-              onClick={() => handleEdit(id, inputValueEdit)}
-              className="transition duration-300 hover:text-black/80"
-            />
-          )}
+        <div className="flex items-center gap-2 rounded-lg bg-white/60 p-3 text-xl *:transition *:duration-300 hover:*:cursor-pointer hover:*:text-black/60">
+          {!editing && <FaPen onClick={() => handleEdit(id, inputValueEdit)} />}
           <ImCheckmark
             onClick={() => {
               editing ? handleEdit(id, inputValueEdit) : handleDelete(id);
             }}
-            className="transition duration-300 hover:text-black/80"
           />
         </div>
       </div>
