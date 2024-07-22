@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Input } from "./ui/input";
-import { FaPen } from "react-icons/fa";
-import { ImCheckmark } from "react-icons/im";
 import { TodoContext } from "@/contexts/todoContext";
+import { Check, Pen } from "lucide-react";
 
 function Todo({ id, content, editing }: Todo) {
   const { handleEdit, handleDelete } = useContext(TodoContext) as TodoContext;
@@ -16,6 +15,7 @@ function Todo({ id, content, editing }: Todo) {
         ) : (
           <Input
             type="text"
+            name="Edit todo"
             value={inputValueEdit}
             onChange={(e) => setInputValueEdit(e.currentTarget.value)}
             onSubmit={(e) => {
@@ -26,12 +26,18 @@ function Todo({ id, content, editing }: Todo) {
           />
         )}
 
-        <div className="flex items-center gap-2 rounded-lg bg-white/60 p-3 text-xl *:transition *:duration-300 hover:*:cursor-pointer hover:*:text-black/60">
-          {!editing && <FaPen onClick={() => handleEdit(id, inputValueEdit)} />}
-          <ImCheckmark
+        <div className="flex items-center gap-2 rounded-lg bg-white/30 p-3 text-xl *:transition *:duration-300 hover:*:cursor-pointer hover:*:text-black/60">
+          {!editing && (
+            <Pen
+              onClick={() => handleEdit(id, inputValueEdit)}
+              aria-label="Edit todo"
+            />
+          )}
+          <Check
             onClick={() => {
               editing ? handleEdit(id, inputValueEdit) : handleDelete(id);
             }}
+            aria-label={!editing ? "Delete todo" : "Save changes"}
           />
         </div>
       </div>
