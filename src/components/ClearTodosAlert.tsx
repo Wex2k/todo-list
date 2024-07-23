@@ -12,13 +12,22 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-export const Alert = ({ message, triggerMessage, handleClear }: AlertProps) => {
+export const ClearTodosAlert = ({
+  message,
+  triggerMessage,
+  handleClear,
+  icon,
+}: AlertProps) => {
   return (
     <>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant={"secondary"} className="uppercase">
+          <Button
+            variant={"secondary"}
+            className="size-12 gap-1 rounded-full p-2 uppercase"
+          >
             {triggerMessage}
+            {icon}
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent className="bg-black">

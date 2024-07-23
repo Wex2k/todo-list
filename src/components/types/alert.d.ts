@@ -1,5 +1,6 @@
 interface AlertProps {
   message: string;
-  triggerMessage: string;
   handleClear: () => void;
+  triggerMessage?: string;
+  icon?: React.ReactNode;
 }
