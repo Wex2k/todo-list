@@ -22,10 +22,7 @@ export const ClearTodosAlert = ({
     <>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button
-            variant={"secondary"}
-            className="size-12 gap-1 rounded-full p-2 uppercase"
-          >
+          <Button variant={"secondary"} className="gap-2 uppercase">
             {triggerMessage}
             {icon}
           </Button>

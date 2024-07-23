@@ -8,14 +8,14 @@ function Todo({ id, content, editing }: Todo) {
   const [inputValueEdit, setInputValueEdit] = useState(content);
 
   return (
-    <div className="w-96 cursor-pointer">
+    <div className="w-96">
       <div className="flex items-center justify-between gap-3 rounded-md bg-white/20 p-2 text-white transition duration-300 hover:bg-white/30">
         {!editing ? (
           <p className="overflow-hidden break-words">{content}</p>
         ) : (
           <Input
             type="text"
-            name="Edit todo"
+            name="edit-todo"
             value={inputValueEdit}
             onChange={(e) => setInputValueEdit(e.currentTarget.value)}
             onSubmit={(e) => {
@@ -31,6 +31,7 @@ function Todo({ id, content, editing }: Todo) {
             <Pen
               onClick={() => handleEdit(id, inputValueEdit)}
               aria-label="Edit todo"
+              aria-hidden={editing}
             />
           )}
           <Check

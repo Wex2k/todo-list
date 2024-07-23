@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
 import TodoList from "@/components/TodoList";
-import { Alert } from "@/components/Alert";
+import { ClearTodosAlert } from "@/components/ClearTodosAlert";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TodoContext } from "@/contexts/todoContext";
@@ -54,7 +54,7 @@ export default function Home() {
 
               <div className="flex justify-center">
                 {todos.length > 0 && (
-                  <Alert
+                  <ClearTodosAlert
                     message="This action cannot be undone. This will clear all of your todos."
                     triggerMessage="Clear All"
                     handleClear={handleClear}
