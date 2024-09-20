@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function NotFound() {
@@ -14,8 +15,11 @@ export default function NotFound() {
             This page doesn&apos;t exist.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Button asChild variant={"secondary"}>
-              <Link href="/">Go back home</Link>
+            <Button asChild variant="secondary">
+              <Link href="/" className="gap-1">
+                <ArrowLeft />
+                Go back home
+              </Link>
             </Button>
           </div>
         </div>
