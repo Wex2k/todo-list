@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { TodoContext } from "@/contexts/TodoContext/todoContext";
 import { NotebookPen } from "lucide-react";
 import { ITodoContext } from "@/contexts/TodoContext/todo-context";
-import Todo from "@/components/todo";
+import Todo from "@/components/Todo";
 
 function TodoList() {
   const { todos } = useContext(TodoContext) as ITodoContext;
