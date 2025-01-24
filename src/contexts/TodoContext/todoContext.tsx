@@ -11,7 +11,9 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const [todos, setTodos] = useState<ITodo[]>(() => {
     if (typeof window !== "undefined") {
-      const savedTodos: ITodo[] = JSON.parse(localStorage.getItem("todos")!);
+      const savedTodos: ITodo[] = JSON.parse(
+        localStorage.getItem("todos")!,
+      ) as ITodo[];
       return savedTodos ?? [];
     }
     return [];
