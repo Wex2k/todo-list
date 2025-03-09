@@ -14,7 +14,7 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
 
   return (
     <div className="w-96">
-      <div className="flex flex-col gap-1 rounded-md bg-white/20 p-2 text-white transition duration-300 hover:bg-white/30">
+      <div className="flex flex-col gap-1 rounded-md bg-white/20 p-2 text-white transition duration-300 hover:bg-white/25">
         <div className="flex flex-row items-center justify-between gap-3">
           <div className="w-full overflow-hidden">
             {!editing ? (
@@ -34,12 +34,12 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
                   e.preventDefault();
                   handleEdit(id, inputValueEdit);
                 }}
-                className="rounded-md border-2 border-white/50 bg-white/20 p-2 text-white placeholder:text-white/50 focus:border-white/50 focus:ring-0"
+                className="rounded-md border-2 border-white/50 bg-white/20 p-2 text-white placeholder:text-white/50"
               />
             )}
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg bg-white/30 p-3 text-xl *:transition *:duration-300 hover:*:cursor-pointer hover:*:text-black/60">
+          <div className="flex items-center gap-2 rounded-lg bg-white/15 p-3 text-xl *:transition *:duration-300 hover:*:cursor-pointer hover:*:text-black/60">
             {!editing && (
               <Pen
                 onClick={() => handleEdit(id, inputValueEdit)}
