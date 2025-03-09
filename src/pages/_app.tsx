@@ -1,7 +1,7 @@
 import { type AppType } from "next/dist/shared/lib/utils";
 
 import "@/styles/globals.css";
-import TodoProvider from "@/contexts/TodoContext/todoContext";
+import TodoProvider from "@/contexts/TodoContext/TodoContext";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (

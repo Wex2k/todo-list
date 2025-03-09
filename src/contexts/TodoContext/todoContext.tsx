@@ -1,6 +1,6 @@
 import { Priority, ITodo } from "@/components/types/todo";
-import { ITodoContext } from "./todo-context";
 import { createContext, FormEvent, useEffect, useState } from "react";
+import { ITodoContext } from "./todo-context";
 
 export const TodoContext = createContext<ITodoContext | undefined>(undefined);
 
@@ -8,6 +8,7 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [input, setInput] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
   const [todos, setTodos] = useState<ITodo[]>(() => {
     if (typeof window !== "undefined") {
@@ -18,6 +19,10 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     }
     return [];
   });
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -103,6 +108,7 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
         handleSubmit,
         setTodos,
         handleSortTodos,
+        loaded,
       }}
     >
       {children}

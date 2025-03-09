@@ -7,6 +7,7 @@ import { FormEvent } from "react";
 export interface ITodoContext {
   todos: ITodo[];
   input: string;
+  loaded: boolean;
   setTodos: (value: ITodo[]) => void;
   setInput: (value: string) => void;
   handleDelete: (id: number) => void;

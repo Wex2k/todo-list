@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Input } from "./ui/input";
-import { TodoContext } from "@/contexts/TodoContext/todoContext";
+import { TodoContext } from "@/contexts/TodoContext/TodoContext";
 import { Check, Pen, RotateCcw } from "lucide-react";
-import { priorities, SelectPriority } from "@/components/select-priority";
+import { priorities, SelectPriority } from "@/components/SelectPriority";
 import { Priority, ITodo } from "./types/todo";
 import { ITodoContext } from "@/contexts/TodoContext/todo-context";
 
