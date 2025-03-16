@@ -20,7 +20,7 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
             {!editing ? (
               <div className="flex items-center">
                 <div
-                  className={`h-8 w-1.5 flex-shrink-0 rounded-md ${priorities[priority].color} mr-2`}
+                  className={`h-8 w-1.5 shrink-0 rounded-md ${priorities[priority].color} mr-2`}
                 />
                 <p className="overflow-hidden break-words">{content}</p>
               </div>
@@ -39,7 +39,7 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
             )}
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg bg-white/15 p-3 text-xl *:transition *:duration-300 hover:*:cursor-pointer hover:*:text-black/60">
+          <div className="flex items-center gap-2 rounded-lg bg-white/15 p-3 text-xl *:transition *:duration-300 *:hover:cursor-pointer *:hover:text-black/60">
             {!editing && (
               <Pen
                 onClick={() => handleEdit(id, inputValueEdit)}
