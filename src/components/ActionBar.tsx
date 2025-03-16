@@ -19,15 +19,25 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
   return (
     <>
       {displayActionBar && (
-        <div className="fixed bottom-5 right-5 z-50 rounded-md bg-white/10 p-2 backdrop-blur-lg">
-          <div className="flex gap-2 *:animate-fade-in-scale">
+        <div className="fixed right-5 bottom-5 z-50 rounded-md bg-white/10 p-2 backdrop-blur-lg">
+          <div className="*:animate-fade-in-scale flex gap-2">
             {showClearButton && (
-              <Button variant="ghost" size="icon" title="Clear all todos">
+              <Button
+                variant="ghost"
+                size="icon"
+                title="Clear all todos"
+                className="cursor-pointer"
+              >
                 <Trash onClick={() => handleClear()} />
               </Button>
             )}
             {showScrollUpButton && (
-              <Button variant="ghost" size="icon" title="Scroll to top">
+              <Button
+                variant="ghost"
+                size="icon"
+                title="Scroll to top"
+                className="cursor-pointer"
+              >
                 <ChevronUp
                   onClick={() => {
                     scrollTo({ top: 0, behavior: "smooth" });
@@ -35,7 +45,12 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
                 />
               </Button>
             )}
-            <Button variant="ghost" size="icon" title="Sort by priority">
+            <Button
+              variant="ghost"
+              size="icon"
+              title="Sort by priority"
+              className="cursor-pointer"
+            >
               <ArrowUpWideNarrow onClick={() => handleSortTodos()} />
             </Button>
           </div>
