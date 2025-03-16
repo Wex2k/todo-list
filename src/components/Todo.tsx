@@ -39,32 +39,33 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
           </div>
 
           <div className="flex items-center gap-2 rounded-lg bg-white/15 p-3 text-xl *:transition *:duration-300 *:hover:cursor-pointer *:hover:text-black/60">
-            {!editing && (
-              <Pen
-                onClick={() => handleEdit(id, inputValueEdit)}
-                aria-label="Edit todo"
-                aria-hidden={editing}
-              />
+            {editing ? (
+              <>
+                <RotateCcw
+                  onClick={() => {
+                    setInputValueEdit(initialContent);
+                  }}
+                  aria-label="Reset changes"
+                  aria-hidden={!editing}
+                />
+                <Check
+                  onClick={() => handleEdit(id, inputValueEdit, priority)}
+                  aria-label="Save changes"
+                />
+              </>
+            ) : (
+              <>
+                <Pen
+                  onClick={() => handleEdit(id, inputValueEdit)}
+                  aria-label="Edit todo"
+                  aria-hidden={editing}
+                />
+                <Check
+                  onClick={() => handleDelete(id)}
+                  aria-label="Delete todo"
+                />
+              </>
             )}
-            {editing && (
-              <RotateCcw
-                onClick={() => {
-                  setInputValueEdit(initialContent);
-                }}
-                aria-label="Reset changes"
-                aria-hidden={!editing}
-              />
-            )}
-            <Check
-              onClick={() => {
-                if (editing) {
-                  handleEdit(id, inputValueEdit, priority);
-                } else {
-                  handleDelete(id);
-                }
-              }}
-              aria-label={!editing ? "Delete todo" : "Save changes"}
-            />
           </div>
         </div>
         {editing && (
