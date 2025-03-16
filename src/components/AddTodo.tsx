@@ -1,4 +1,3 @@
-import { ITodoContext } from "@/contexts/TodoContext/todo-context";
 import { TodoContext } from "@/contexts/TodoContext/TodoContext";
 import React, { useContext } from "react";
 import { Input } from "./ui/input";
@@ -6,9 +5,7 @@ import { Button } from "./ui/button";
 import TodoList from "./TodoList";
 
 function AddTodo() {
-  const { input, setInput, handleSubmit, loaded } = useContext(
-    TodoContext,
-  ) as ITodoContext;
+  const { input, setInput, handleSubmit, loaded } = useContext(TodoContext)!;
 
   return (
     <div className="flex flex-col gap-9">

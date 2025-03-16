@@ -3,13 +3,10 @@ import { Button } from "./ui/button";
 import { ArrowUpWideNarrow, ChevronUp, Trash } from "lucide-react";
 import { TodoContext } from "@/contexts/TodoContext/TodoContext";
 import { useScroll } from "@/hooks/useScroll";
-import { ITodoContext } from "@/contexts/TodoContext/todo-context";
 import { ActionBarProps } from "@/components/types/action-bar";
 
 export const ActionBar = ({ loaded }: ActionBarProps) => {
-  const { todos, handleClear, handleSortTodos } = useContext(
-    TodoContext,
-  ) as ITodoContext;
+  const { todos, handleClear, handleSortTodos } = useContext(TodoContext)!;
   const { scrollY } = useScroll();
 
   const showClearButton = loaded && todos.length > 0;

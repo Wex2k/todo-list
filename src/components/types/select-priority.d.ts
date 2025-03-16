@@ -1,6 +1,6 @@
 import { Priority } from "./todo";
 
-export type SelectPriorityProps = {
+export interface SelectPriorityProps {
   priority: Priority;
   setPriority: (value: Priority) => void;
-};
+}

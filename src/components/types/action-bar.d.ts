@@ -1,3 +1,3 @@
-export type ActionBarProps = {
+export interface ActionBarProps {
   loaded: boolean;
-};
+}
