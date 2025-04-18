@@ -8,7 +8,7 @@ function TodoList() {
 
   return (
     <div className="mb-20 flex flex-col gap-5 sm:mb-0">
-      {todos.length > 0 &&
+      {!!todos &&
         todos.map((todo) => (
           <Todo
             key={todo.id}
@@ -19,7 +19,7 @@ function TodoList() {
           />
         ))}
 
-      {todos.length === 0 && (
+      {!todos?.length && (
         <div className="flex flex-col gap-5">
           <NotebookPen className="size-52 self-center text-white sm:size-60" />
           <h1 className="text-2xl underline decoration-white/60 underline-offset-4">
