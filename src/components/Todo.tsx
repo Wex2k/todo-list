@@ -33,6 +33,7 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
                   e.preventDefault();
                   handleEdit(id, inputValueEdit);
                 }}
+                autoFocus
                 className="rounded-md border-2 border-white/50 bg-white/20 p-2 text-white placeholder:text-white/50"
               />
             )}
