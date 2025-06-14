@@ -1,6 +1,7 @@
-import { Priority, ITodo } from "@/components/types/todo";
+import type { Priority, ITodo } from "@/components/types/todo";
+import type { ITodoContext } from "./todo-context";
 import { createContext, FormEvent, useEffect, useState } from "react";
-import { ITodoContext } from "./todo-context";
+import { Priorities, priorityOrder } from "@/utils/constants";
 
 export const TodoContext = createContext<ITodoContext | undefined>(undefined);
 
@@ -11,13 +12,12 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loaded, setLoaded] = useState(false);
 
   const [todos, setTodos] = useState<ITodo[]>(() => {
-    if (typeof window !== "undefined") {
-      const savedTodos: ITodo[] = JSON.parse(
-        localStorage.getItem("todos")!,
-      ) as ITodo[];
-      return savedTodos ?? [];
-    }
-    return [];
+    if (typeof window === "undefined") return [];
+
+    const savedTodos: ITodo[] = JSON.parse(
+      localStorage.getItem("todos")!,
+    ) as ITodo[];
+    return savedTodos ?? [];
   });
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
           content: input,
           editing: false,
           id: Date.now(),
-          priority: "low",
+          priority: Priorities.LOW,
         },
       ]);
       setInput("");
@@ -83,12 +83,6 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const handleSortTodos = () => {
-    const priorityOrder = {
-      low: 1,
-      medium: 2,
-      high: 3,
-    };
-
     setTodos((prevTodos) =>
       prevTodos.toSorted((a, b) => {
         return priorityOrder[b.priority] - priorityOrder[a.priority];
