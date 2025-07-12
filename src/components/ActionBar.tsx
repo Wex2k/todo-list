@@ -25,7 +25,7 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
                 title="Clear all todos"
                 className="cursor-pointer"
               >
-                <Trash onClick={() => handleClear()} />
+                <Trash onClick={handleClear} />
               </Button>
             )}
             {showScrollUpButton && (
@@ -48,7 +48,7 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
               title="Sort by priority"
               className="cursor-pointer"
             >
-              <ArrowUpWideNarrow onClick={() => handleSortTodos()} />
+              <ArrowUpWideNarrow onClick={handleSortTodos} />
             </Button>
           </div>
         </div>
