@@ -38,7 +38,7 @@ export function SelectPriority({ priority, setPriority }: SelectPriorityProps) {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Priority</SelectLabel>
+          <SelectLabel>Select Priority</SelectLabel>
           <div className="flex flex-col gap-1">
             {Object.entries(priorities).map(([value, { color, text }]) => (
               <SelectItem key={value} value={value}>
