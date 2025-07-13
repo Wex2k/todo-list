@@ -6,3 +6,11 @@
 export interface ActionBarProps {
   loaded: boolean;
 }
+
+export type ActionBarButton = {
+  name: string;
+  icon: React.ReactNode;
+  title: string;
+  action: () => void;
+  show: boolean;
+};
