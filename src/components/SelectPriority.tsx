@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   Select,
   SelectContent,
@@ -27,7 +26,7 @@ export function SelectPriority({ priority, setPriority }: SelectPriorityProps) {
       <SelectTrigger className="w-[180px]">
         <SelectValue
           placeholder={
-            <div className="flex items-center">
+            <div className="flex items-center gap-1">
               <div
                 className={`size-2 rounded-full ${priorities[priority].color} mr-2`}
               />
