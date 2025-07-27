@@ -56,7 +56,7 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input !== "") {
+    if (input.trim() !== "") {
       setTodos([
         ...todos,
         {
