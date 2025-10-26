@@ -1,16 +1,18 @@
 import React, { useContext } from "react";
 import { Button } from "./ui/button";
-import { ArrowUpWideNarrow, ChevronUp, Trash } from "lucide-react";
+import { ArrowUpWideNarrow, ChevronUp, Moon, Sun, Trash } from "lucide-react";
 import { TodoContext } from "@/contexts/TodoContext/TodoContext";
 import { useScroll } from "@/hooks/useScroll";
 import type {
   ActionBarButton,
   ActionBarProps,
 } from "@/components/types/action-bar";
+import { useTheme } from "next-themes";
 
 export const ActionBar = ({ loaded }: ActionBarProps) => {
   const { todos, handleClear, handleSortTodos } = useContext(TodoContext)!;
   const { scrollY } = useScroll();
+  const { setTheme, theme } = useTheme();
 
   const actionBarButtons: ActionBarButton[] = [
     {
@@ -27,7 +29,7 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
       action: () => {
         scrollTo({ top: 0, behavior: "smooth" });
       },
-      show: scrollY > 50,
+      show: todos.length > 0 && scrollY > 100,
     },
     {
       name: "Sort",
@@ -35,6 +37,15 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
       title: "Sort by priority",
       action: handleSortTodos,
       show: true, // Always show sort button
+    },
+    {
+      name: "Toggle Theme",
+      icon: theme === "light" ? <Moon /> : <Sun />,
+      title: "Toggle theme",
+      action: () => {
+        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+      },
+      show: true,
     },
   ];
 
@@ -46,7 +57,7 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
           <Button
             key={button.name}
             variant="ghost"
-            size="icon"
+            size="lg"
             className="text-white hover:bg-white/20"
             title={button.title}
             onClick={button.action}
