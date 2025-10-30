@@ -1,13 +1,13 @@
-import * as React from "react";
+import { useEffect, useState, type ComponentProps } from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export function ThemeProvider({
   children,
   ...props
-}: React.ComponentProps<typeof NextThemesProvider>) {
-  const [mounted, setMounted] = React.useState(false);
+}: ComponentProps<typeof NextThemesProvider>) {
+  const [mounted, setMounted] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 

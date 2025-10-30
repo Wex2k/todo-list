@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-import { TodoContext } from "@/contexts/TodoContext/TodoContext";
+import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { NotebookPen } from "lucide-react";
 import Todo from "@/components/Todo";
 
 function TodoList() {
-  const { todos } = useContext(TodoContext)!;
+  const { todos } = useTodo();
 
   return (
     <div className="mb-20 flex flex-col gap-5 sm:mb-0">

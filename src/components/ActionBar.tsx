@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
 import { Button } from "./ui/button";
 import { ArrowUpWideNarrow, ChevronUp, Moon, Sun, Trash } from "lucide-react";
-import { TodoContext } from "@/contexts/TodoContext/TodoContext";
+import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { useScroll } from "@/hooks/useScroll";
 import type {
   ActionBarButton,
@@ -10,7 +9,7 @@ import type {
 import { useTheme } from "next-themes";
 
 export const ActionBar = ({ loaded }: ActionBarProps) => {
-  const { todos, handleClear, handleSortTodos } = useContext(TodoContext)!;
+  const { todos, handleClear, handleSortTodos } = useTodo();
   const { scrollY } = useScroll();
   const { setTheme, theme } = useTheme();
 

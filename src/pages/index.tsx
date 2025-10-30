@@ -1,12 +1,11 @@
 import Head from "next/head";
 import { ActionBar } from "@/components/ActionBar";
-import { useContext } from "react";
-import { TodoContext } from "@/contexts/TodoContext/TodoContext";
+import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import AddTodo from "@/components/AddTodo";
 import TodoList from "@/components/TodoList";
 
 export default function Home() {
-  const { loaded } = useContext(TodoContext)!;
+  const { loaded } = useTodo();
 
   return (
     <>

@@ -1,10 +1,9 @@
-import { TodoContext } from "@/contexts/TodoContext/TodoContext";
-import React, { useContext } from "react";
+import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
 function AddTodo() {
-  const { input, setInput, handleSubmit } = useContext(TodoContext)!;
+  const { input, setInput, handleSubmit } = useTodo();
 
   return (
     <form
