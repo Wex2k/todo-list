@@ -1,11 +1,17 @@
 import type { Priority, ITodo } from "@/components/types/todo";
 import type { ITodoContext } from "./todo-context";
-import { createContext, FormEvent, useEffect, useState } from "react";
+import {
+  createContext,
+  FormEvent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Priorities, priorityOrder } from "@/utils/constants";
 
-export const TodoContext = createContext<ITodoContext | undefined>(undefined);
+const TodoContext = createContext<ITodoContext | undefined>(undefined);
 
-const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
+export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [input, setInput] = useState("");
@@ -110,4 +116,10 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export default TodoProvider;
+export const useTodo = () => {
+  const context = useContext(TodoContext);
+  if (!context) {
+    throw new Error("useTodo must be used within a TodoProvider");
+  }
+  return context;
+};
