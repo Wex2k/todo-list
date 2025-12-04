@@ -5,7 +5,7 @@
  * - `MEDIUM`: Indicates a medium priority task.
  * - `HIGH`: Indicates a high priority task.
  */
-export enum Priorities {
+export enum TaskPriority {
   LOW = "low",
   MEDIUM = "medium",
   HIGH = "high",

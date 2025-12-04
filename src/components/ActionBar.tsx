@@ -1,58 +1,81 @@
-import React, { useContext } from "react";
-import { Button } from "./ui/button";
-import { ArrowUpWideNarrow, ChevronUp, Trash } from "lucide-react";
-import { TodoContext } from "@/contexts/TodoContext/TodoContext";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { ArrowUpWideNarrow, ChevronUp, Moon, Sun, Trash } from "lucide-react";
+import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { useScroll } from "@/hooks/useScroll";
-import { ActionBarProps } from "@/components/types/action-bar";
+import type {
+  ActionBarButton,
+  ActionBarProps,
+} from "@/components/types/action-bar";
+import { useTheme } from "next-themes";
 
 export const ActionBar = ({ loaded }: ActionBarProps) => {
-  const { todos, handleClear, handleSortTodos } = useContext(TodoContext)!;
+  const { todos, handleClear, handleSortTodos } = useTodo();
   const { scrollY } = useScroll();
+  const { setTheme, theme } = useTheme();
 
-  const showClearButton = loaded && todos.length > 0;
-  const showScrollUpButton = scrollY > 50;
-  const displayActionBar = showClearButton || showScrollUpButton;
+  const actionBarButtons: ActionBarButton[] = [
+    {
+      name: "Clear",
+      icon: <Trash />,
+      title: "Clear all todos",
+      action: handleClear,
+      show: todos.length > 0,
+    },
+    {
+      name: "Scroll Up",
+      icon: <ChevronUp />,
+      title: "Scroll to top",
+      action: () => {
+        scrollTo({ top: 0, behavior: "smooth" });
+      },
+      show: todos.length > 0 && scrollY > 100,
+    },
+    {
+      name: "Sort",
+      icon: <ArrowUpWideNarrow />,
+      title: "Sort by priority",
+      action: handleSortTodos,
+      show: todos.length > 1, // Show only if more than one todo exists
+    },
+    {
+      name: "Toggle Theme",
+      icon: theme === "light" ? <Moon /> : <Sun />,
+      title: "Toggle theme",
+      action: () => {
+        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+      },
+      show: loaded,
+    },
+  ];
 
   return (
-    <>
-      {displayActionBar && (
-        <div className="fixed right-5 bottom-5 z-50 rounded-md bg-white/10 p-2 backdrop-blur-lg">
-          <div className="*:animate-fade-in-scale flex gap-2">
-            {showClearButton && (
+    <div className="fixed right-5 bottom-5 z-50 rounded-md border p-2 shadow-lg backdrop-blur-lg">
+      {actionBarButtons.map((button) => {
+        if (!button.show) return null;
+        return (
+          <Tooltip key={button.name}>
+            <TooltipTrigger asChild>
               <Button
+                key={button.name}
+                name={button.title}
                 variant="ghost"
-                size="icon"
-                title="Clear all todos"
-                className="cursor-pointer"
+                size="lg"
+                onClick={button.action}
               >
-                <Trash onClick={handleClear} />
+                {button.icon}
               </Button>
-            )}
-            {showScrollUpButton && (
-              <Button
-                variant="ghost"
-                size="icon"
-                title="Scroll to top"
-                className="cursor-pointer"
-              >
-                <ChevronUp
-                  onClick={() => {
-                    scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                />
-              </Button>
-            )}
-            <Button
-              variant="ghost"
-              size="icon"
-              title="Sort by priority"
-              className="cursor-pointer"
-            >
-              <ArrowUpWideNarrow onClick={handleSortTodos} />
-            </Button>
-          </div>
-        </div>
-      )}
-    </>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{button.title}</p>
+            </TooltipContent>
+          </Tooltip>
+        );
+      })}
+    </div>
   );
 };

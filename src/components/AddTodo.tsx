@@ -1,10 +1,9 @@
-import { TodoContext } from "@/contexts/TodoContext/TodoContext";
-import React, { useContext } from "react";
+import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
 function AddTodo() {
-  const { input, setInput, handleSubmit } = useContext(TodoContext)!;
+  const { input, setInput, handleSubmit } = useTodo();
 
   return (
     <form
@@ -14,12 +13,11 @@ function AddTodo() {
       <Input
         id="add-todo"
         type="text"
-        placeholder="Add todo..."
-        className="w-full rounded-md border-2 border-white/50 bg-white/20 p-2 text-white placeholder:text-white/50 focus:border-white/50 focus:ring-0"
+        placeholder="Add a todo..."
         onChange={(e) => setInput(e.currentTarget.value)}
         value={input}
       />
-      <Button variant="secondary" className="rounded-md uppercase">
+      <Button variant="outline" className="rounded-md uppercase">
         Add todo
       </Button>
     </form>

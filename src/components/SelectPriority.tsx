@@ -26,11 +26,11 @@ export function SelectPriority({ priority, setPriority }: SelectPriorityProps) {
       <SelectTrigger className="w-[180px]">
         <SelectValue
           placeholder={
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-4">
               <div
-                className={`size-2 rounded-full ${priorities[priority].color} mr-2`}
+                className={`size-2 rounded-full ${priorities[priority].color}`}
               />
-              <p>{priorities[priority].text}</p>
+              <p className="text-primary">{priorities[priority].text}</p>
             </div>
           }
         />
@@ -38,7 +38,7 @@ export function SelectPriority({ priority, setPriority }: SelectPriorityProps) {
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Select Priority</SelectLabel>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col">
             {Object.entries(priorities).map(([value, { color, text }]) => (
               <SelectItem key={value} value={value}>
                 <div

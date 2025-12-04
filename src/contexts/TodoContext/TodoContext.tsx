@@ -1,32 +1,41 @@
 import type { Priority, ITodo } from "@/components/types/todo";
 import type { ITodoContext } from "./todo-context";
-import { createContext, FormEvent, useEffect, useState } from "react";
-import { Priorities, priorityOrder } from "@/utils/constants";
+import {
+  createContext,
+  FormEvent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { TaskPriority, priorityOrder } from "@/utils/constants";
 
-export const TodoContext = createContext<ITodoContext | undefined>(undefined);
+const TodoContext = createContext<ITodoContext | undefined>(undefined);
 
-const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
+export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [input, setInput] = useState("");
   const [loaded, setLoaded] = useState(false);
 
-  const [todos, setTodos] = useState<ITodo[]>(() => {
-    if (typeof window === "undefined") return [];
-
-    const savedTodos: ITodo[] = JSON.parse(
-      localStorage.getItem("todos")!,
-    ) as ITodo[];
-    return savedTodos ?? [];
-  });
+  const [todos, setTodos] = useState<ITodo[]>([]);
 
   useEffect(() => {
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos) {
+      try {
+        setTodos(JSON.parse(savedTodos));
+      } catch (error) {
+        console.error("Failed to parse todos from local storage", error);
+      }
+    }
     setLoaded(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+    if (loaded) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
+  }, [todos, loaded]);
 
   const handleDelete = (id: number) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
@@ -63,7 +72,7 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
           content: input,
           editing: false,
           id: Date.now(),
-          priority: Priorities.LOW,
+          priority: TaskPriority.LOW,
         },
       ]);
       setInput("");
@@ -110,4 +119,10 @@ const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export default TodoProvider;
+export const useTodo = () => {
+  const context = useContext(TodoContext);
+  if (!context) {
+    throw new Error("useTodo must be used within a TodoProvider");
+  }
+  return context;
+};

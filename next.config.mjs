@@ -18,6 +18,7 @@ const config = {
     defaultLocale: "en",
   },
   devIndicators: false,
+  allowedDevOrigins: ["192.168.*.*"],
 };
 
 export default config;
