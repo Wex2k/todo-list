@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { Check, Pen, RotateCcw } from "lucide-react";
 import { priorities, SelectPriority } from "@/components/SelectPriority";
@@ -13,7 +15,7 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
 
   return (
     <div className="w-96">
-      <div className="flex flex-col gap-1 rounded-md bg-white/20 p-2 text-white transition duration-300 hover:bg-white/25">
+      <div className="bg-card text-card-foreground flex flex-col gap-2 rounded-md border p-2">
         <div className="flex flex-row items-center justify-between gap-3">
           <div className="w-full overflow-hidden">
             {!editing ? (
@@ -21,7 +23,7 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
                 <div
                   className={`h-8 w-1.5 shrink-0 rounded-md ${priorities[priority].color} mr-2`}
                 />
-                <p className="overflow-hidden break-words">{content}</p>
+                <p className="overflow-hidden wrap-break-word">{content}</p>
               </div>
             ) : (
               <Input
@@ -29,42 +31,83 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
                 name="edit-todo"
                 value={inputValueEdit}
                 onChange={(e) => setInputValueEdit(e.currentTarget.value)}
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleEdit(id, inputValueEdit);
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleEdit(id, inputValueEdit);
+                  }
                 }}
                 autoFocus
-                className="rounded-md border-2 border-white/50 bg-white/20 p-2 text-white placeholder:text-white/50"
               />
             )}
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg bg-white/15 p-3 text-xl *:transition *:duration-300 *:hover:cursor-pointer *:hover:text-black/60">
+          <div className="bg-muted flex items-center gap-1 rounded-md border p-1 md:p-0">
             {editing ? (
               <>
-                <RotateCcw
-                  onClick={() => {
-                    setInputValueEdit(initialContent);
-                  }}
-                  aria-label="Reset changes"
-                  aria-hidden={!editing}
-                />
-                <Check
-                  onClick={() => handleEdit(id, inputValueEdit, priority)}
-                  aria-label="Save changes"
-                />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setInputValueEdit(initialContent)}
+                    >
+                      <RotateCcw className="size-4" />
+                      <span className="sr-only">Reset changes</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Reset changes</p>
+                  </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleEdit(id, inputValueEdit, priority)}
+                    >
+                      <Check className="size-4" />
+                      <span className="sr-only">Save changes</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Save changes</p>
+                  </TooltipContent>
+                </Tooltip>
               </>
             ) : (
               <>
-                <Pen
-                  onClick={() => handleEdit(id, inputValueEdit)}
-                  aria-label="Edit todo"
-                  aria-hidden={editing}
-                />
-                <Check
-                  onClick={() => handleDelete(id)}
-                  aria-label="Delete todo"
-                />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleEdit(id, inputValueEdit)}
+                    >
+                      <Pen className="size-4" />
+                      <span className="sr-only">Edit todo</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Edit todo</p>
+                  </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDelete(id)}
+                    >
+                      <Check className="size-4" />
+                      <span className="sr-only">Complete todo</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Complete todo</p>
+                  </TooltipContent>
+                </Tooltip>
               </>
             )}
           </div>

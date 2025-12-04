@@ -1,4 +1,9 @@
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ArrowUpWideNarrow, ChevronUp, Moon, Sun, Trash } from "lucide-react";
 import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { useScroll } from "@/hooks/useScroll";
@@ -19,7 +24,7 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
       icon: <Trash />,
       title: "Clear all todos",
       action: handleClear,
-      show: loaded && todos.length > 0,
+      show: todos.length > 0,
     },
     {
       name: "Scroll Up",
@@ -35,7 +40,7 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
       icon: <ArrowUpWideNarrow />,
       title: "Sort by priority",
       action: handleSortTodos,
-      show: true, // Always show sort button
+      show: todos.length > 1, // Show only if more than one todo exists
     },
     {
       name: "Toggle Theme",
@@ -44,25 +49,31 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
       action: () => {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
       },
-      show: true,
+      show: loaded,
     },
   ];
 
   return (
-    <div className="fixed right-5 bottom-5 z-50 rounded-md bg-white/10 p-2 backdrop-blur-lg">
+    <div className="fixed right-5 bottom-5 z-50 rounded-md border p-2 shadow-lg backdrop-blur-lg">
       {actionBarButtons.map((button) => {
         if (!button.show) return null;
         return (
-          <Button
-            key={button.name}
-            variant="ghost"
-            size="lg"
-            className="text-white hover:bg-white/20"
-            title={button.title}
-            onClick={button.action}
-          >
-            {button.icon}
-          </Button>
+          <Tooltip key={button.name}>
+            <TooltipTrigger asChild>
+              <Button
+                key={button.name}
+                name={button.title}
+                variant="ghost"
+                size="lg"
+                onClick={button.action}
+              >
+                {button.icon}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{button.title}</p>
+            </TooltipContent>
+          </Tooltip>
         );
       })}
     </div>

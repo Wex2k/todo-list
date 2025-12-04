@@ -46,33 +46,6 @@
   }
 }
 
-/* -------------------- */
-/*   SCROLLBAR STYLES   */
-/* -------------------- */
-
-/* Width */
-::-webkit-scrollbar {
-  width: 0.5rem;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgb(0 0 0 / 0.9);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgb(255 255 255 / 0.6);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: white;
-}
-/* -------------------- */
-/* SCROLLBAR STYLES END */
-/* -------------------- */
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

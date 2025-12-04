@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Priorities, priorityOrder } from "@/utils/constants";
+import { TaskPriority, priorityOrder } from "@/utils/constants";
 
 const TodoContext = createContext<ITodoContext | undefined>(undefined);
 
@@ -17,22 +17,25 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   const [input, setInput] = useState("");
   const [loaded, setLoaded] = useState(false);
 
-  const [todos, setTodos] = useState<ITodo[]>(() => {
-    if (typeof window === "undefined") return [];
-
-    const savedTodos: ITodo[] = JSON.parse(
-      localStorage.getItem("todos")!,
-    ) as ITodo[];
-    return savedTodos ?? [];
-  });
+  const [todos, setTodos] = useState<ITodo[]>([]);
 
   useEffect(() => {
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos) {
+      try {
+        setTodos(JSON.parse(savedTodos));
+      } catch (error) {
+        console.error("Failed to parse todos from local storage", error);
+      }
+    }
     setLoaded(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+    if (loaded) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
+  }, [todos, loaded]);
 
   const handleDelete = (id: number) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
@@ -69,7 +72,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
           content: input,
           editing: false,
           id: Date.now(),
-          priority: Priorities.LOW,
+          priority: TaskPriority.LOW,
         },
       ]);
       setInput("");
