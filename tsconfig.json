@@ -17,7 +17,7 @@
     "moduleResolution": "Node16",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
@@ -40,7 +40,8 @@
     "**/*.cjs",
     "**/*.mjs",
     ".next/types/**/*.ts",
-    "eslint.config.mjs"  ],
+    "eslint.config.mjs"
+  ],
   "exclude": [
     "node_modules"
   ]
