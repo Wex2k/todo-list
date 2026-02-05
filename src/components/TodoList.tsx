@@ -1,6 +1,6 @@
+import Todo from "@/components/Todo";
 import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { NotebookPen } from "lucide-react";
-import Todo from "@/components/Todo";
 
 function TodoList() {
   const { todos } = useTodo();

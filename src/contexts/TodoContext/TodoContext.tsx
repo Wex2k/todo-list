@@ -1,5 +1,6 @@
-import type { Priority, ITodo } from "@/components/types/todo";
-import type { ITodoContext } from "./todo-context";
+import type { ITodo, Priority } from "@/components/types/todo";
+import type { ITodoContext } from "@/contexts/TodoContext/todo-context";
+import { priorityOrder, TaskPriority } from "@/utils/constants";
 import {
   createContext,
   FormEvent,
@@ -7,7 +8,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { TaskPriority, priorityOrder } from "@/utils/constants";
 
 const TodoContext = createContext<ITodoContext | undefined>(undefined);
 

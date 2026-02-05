@@ -1,16 +1,16 @@
+import type {
+  ActionBarButton,
+  ActionBarProps,
+} from "@/components/types/action-bar";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ArrowUpWideNarrow, ChevronUp, Moon, Sun, Trash } from "lucide-react";
 import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { useScroll } from "@/hooks/useScroll";
-import type {
-  ActionBarButton,
-  ActionBarProps,
-} from "@/components/types/action-bar";
+import { ArrowUpWideNarrow, ChevronUp, Moon, Sun, Trash } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export const ActionBar = ({ loaded }: ActionBarProps) => {

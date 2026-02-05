@@ -1,11 +1,15 @@
-import { useState } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { priorities, SelectPriority } from "@/components/SelectPriority";
+import { ITodo, Priority } from "@/components/types/todo";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useTodo } from "@/contexts/TodoContext/TodoContext";
 import { Check, Pen, RotateCcw } from "lucide-react";
-import { priorities, SelectPriority } from "@/components/SelectPriority";
-import { Priority, ITodo } from "./types/todo";
+import { useState } from "react";
 
 function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
   const { handleEdit, handleDelete } = useTodo();

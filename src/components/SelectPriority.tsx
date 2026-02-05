@@ -1,3 +1,5 @@
+import { SelectPriorityProps } from "@/components/types/select-priority";
+import { Priority } from "@/components/types/todo";
 import {
   Select,
   SelectContent,
@@ -7,8 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SelectPriorityProps } from "./types/select-priority";
-import { Priority } from "./types/todo";
 
 export const priorities = {
   low: { color: "bg-green-700", text: "Low" },
@@ -23,7 +23,7 @@ export function SelectPriority({ priority, setPriority }: SelectPriorityProps) {
         setPriority(value as Priority);
       }}
     >
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-45">
         <SelectValue
           placeholder={
             <div className="flex items-center gap-4">
