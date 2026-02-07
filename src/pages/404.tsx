@@ -1,10 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import Head from "next/head";
 import Link from "next/link";
 
 export default function NotFound() {
   return (
     <>
+      <Head>
+        <title key="404">404</title>
+      </Head>
+
       <main className="bg-background grid min-h-screen place-items-center px-6 py-24 sm:py-32 lg:px-8">
         <div className="text-center">
           <p className="text-primary text-lg font-semibold">404</p>

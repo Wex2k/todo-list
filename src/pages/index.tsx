@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Todos</title>
+        <title key="todos">Todos</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
