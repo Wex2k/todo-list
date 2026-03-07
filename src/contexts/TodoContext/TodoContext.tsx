@@ -5,9 +5,44 @@ import {
   createContext,
   FormEvent,
   useContext,
-  useEffect,
+  useSyncExternalStore,
   useState,
 } from "react";
+
+type TodoListener = () => void;
+const todoListeners = new Set<TodoListener>();
+let cachedTodos: ITodo[] | undefined;
+
+const todoStore = {
+  subscribe: (callback: TodoListener) => {
+    todoListeners.add(callback);
+    return () => {
+      todoListeners.delete(callback);
+    };
+  },
+  getSnapshot: (): ITodo[] => {
+    if (cachedTodos === undefined) {
+      const saved = localStorage.getItem("todos");
+      if (saved) {
+        try {
+          cachedTodos = JSON.parse(saved) as ITodo[];
+        } catch (error) {
+          console.error("Failed to parse todos from local storage", error);
+          cachedTodos = [];
+        }
+      } else {
+        cachedTodos = [];
+      }
+    }
+    return cachedTodos;
+  },
+  getServerSnapshot: (): ITodo[] => [],
+  update: (todos: ITodo[]) => {
+    cachedTodos = todos;
+    localStorage.setItem("todos", JSON.stringify(todos));
+    todoListeners.forEach((l) => l());
+  },
+};
 
 const TodoContext = createContext<ITodoContext | undefined>(undefined);
 
@@ -15,30 +50,19 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [input, setInput] = useState("");
-  const [loaded, setLoaded] = useState(false);
-
-  const [todos, setTodos] = useState<ITodo[]>([]);
-
-  useEffect(() => {
-    const savedTodos = localStorage.getItem("todos");
-    if (savedTodos) {
-      try {
-        setTodos(JSON.parse(savedTodos));
-      } catch (error) {
-        console.error("Failed to parse todos from local storage", error);
-      }
-    }
-    setLoaded(true);
-  }, []);
-
-  useEffect(() => {
-    if (loaded) {
-      localStorage.setItem("todos", JSON.stringify(todos));
-    }
-  }, [todos, loaded]);
+  const todos = useSyncExternalStore(
+    todoStore.subscribe,
+    todoStore.getSnapshot,
+    todoStore.getServerSnapshot,
+  );
+  const loaded = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   const handleDelete = (id: number) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+    todoStore.update(todos.filter((todo) => todo.id !== id));
   };
 
   const handleEdit = (id: number, content: string, priority?: Priority) => {
@@ -48,8 +72,8 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
       return;
     }
 
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
+    todoStore.update(
+      todos.map((todo) =>
         todo.id === id
           ? {
               ...todo,
@@ -66,7 +90,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input.trim() !== "") {
-      setTodos([
+      todoStore.update([
         ...todos,
         {
           content: input,
@@ -86,14 +110,14 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
         "This action cannot be undone. Do you want to clear all todos?",
       )
     ) {
-      setTodos([]);
+      todoStore.update([]);
       scrollTo(0, 0);
     }
   };
 
   const handleSortTodos = () => {
-    setTodos((prevTodos) =>
-      prevTodos.toSorted((a, b) => {
+    todoStore.update(
+      todos.toSorted((a, b) => {
         return priorityOrder[b.priority] - priorityOrder[a.priority];
       }),
     );
@@ -109,7 +133,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
         handleDelete,
         handleEdit,
         handleSubmit,
-        setTodos,
+        setTodos: todoStore.update,
         handleSortTodos,
         loaded,
       }}
