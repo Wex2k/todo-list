@@ -16,7 +16,7 @@ import { useTheme } from "next-themes";
 export const ActionBar = ({ loaded }: ActionBarProps) => {
   const { todos, handleClear, handleSortTodos } = useTodo();
   const { scrollY } = useScroll();
-  const { setTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   const actionBarButtons: ActionBarButton[] = [
     {
@@ -44,10 +44,10 @@ export const ActionBar = ({ loaded }: ActionBarProps) => {
     },
     {
       name: "Toggle Theme",
-      icon: theme === "light" ? <Moon /> : <Sun />,
+      icon: resolvedTheme === "light" ? <Moon /> : <Sun />,
       title: "Toggle theme",
       action: () => {
-        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+        setTheme(resolvedTheme === "light" ? "dark" : "light");
       },
       show: loaded,
     },
