@@ -11,6 +11,7 @@ import {
 
 type TodoListener = () => void;
 const todoListeners = new Set<TodoListener>();
+const EMPTY_TODOS: ITodo[] = [];
 let cachedTodos: ITodo[] | undefined;
 
 const todoStore = {
@@ -36,7 +37,7 @@ const todoStore = {
     }
     return cachedTodos;
   },
-  getServerSnapshot: (): ITodo[] => [],
+  getServerSnapshot: (): ITodo[] => EMPTY_TODOS,
   update: (todos: ITodo[]) => {
     cachedTodos = todos;
     localStorage.setItem("todos", JSON.stringify(todos));

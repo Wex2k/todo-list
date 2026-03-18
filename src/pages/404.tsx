@@ -23,7 +23,7 @@ export default function NotFound() {
             <Button asChild variant="secondary">
               <Link href="/" className="gap-1">
                 <ArrowLeft />
-                Go back home
+                Go back
               </Link>
             </Button>
           </div>
