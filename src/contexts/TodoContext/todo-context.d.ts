@@ -24,7 +24,7 @@ export interface ITodoContext {
   setInput: (value: string) => void;
   handleDelete: (id: number) => void;
   handleEdit: (id: number, content: string, priority?: Priority) => void;
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleSubmit: (e: SubmitEvent<HTMLFormElement>) => void;
   handleClear: () => void;
   handleSortTodos: () => void;
 }
