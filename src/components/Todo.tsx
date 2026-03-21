@@ -57,11 +57,11 @@ function Todo({ id, content, editing, priority: initialPriority }: ITodo) {
                       onClick={() => setInputValueEdit(initialContent)}
                     >
                       <RotateCcw className="size-4" />
-                      <span className="sr-only">Reset changes</span>
+                      <span className="sr-only">Revert changes</span>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>Reset changes</p>
+                    <p>Revert changes</p>
                   </TooltipContent>
                 </Tooltip>
                 <Tooltip>
