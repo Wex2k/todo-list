@@ -88,7 +88,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
     setInput("");
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     if (input.trim() !== "") {
       todoStore.update([
