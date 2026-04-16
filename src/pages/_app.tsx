@@ -7,12 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <TooltipProvider>
         <TodoProvider>
           <Component {...pageProps} />
