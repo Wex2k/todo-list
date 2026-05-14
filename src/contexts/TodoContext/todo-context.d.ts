@@ -1,5 +1,4 @@
 import { ITodo, Priority } from "@/components/types/todo";
-import { FormEvent } from "react";
 
 /**
  * This interface defines the structure of the todo context, including the todos array,
